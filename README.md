@@ -49,4 +49,4 @@ O Repository é responsável por persistir e recuperar os dados da entidade Pers
 4. Crie o banco no seu banco de preferência - eu usei o Mysql
 5. Mude o applications.properties para refletir os dados de acesso ao seu banco - usei variáveis de ambiente no Intellij para acesso ao banco
 6. Ao rodar o projeto pela primeira vez o Flyway vai criar a tabela personagens no banco que referenciou acima
-7. Para testar use o Insomnia ou o Postman para testar as requisições - [Coleção de request que fiz no Insomnia]()
+7. Para testar use o Insomnia ou o Postman para testar as requisições - [Coleção de request que fiz no Insomnia](https://github.com/srtapoe/crud/blob/main/requests-characters)
