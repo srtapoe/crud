@@ -12,10 +12,6 @@ public interface CharacterMapper {
 
     CharacterDto toDto(Character character);
     CharacterIdDto toDtoId(Character character);
-    Character toEntity(CharacterDto characterDto);
     Character toEntityId(CharacterIdDto characterIdDto);
-    List<CharacterDto> toDtoList(List<Character> characters);
     List<CharacterIdDto> toDtoIdList(List<Character> characters);
-    List<Character> toEntityList(List<CharacterDto> characterDtos);
-
 }

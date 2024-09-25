@@ -2,7 +2,6 @@ package com.br.studies.crud.controller;
 
 import com.br.studies.crud.dto.CharacterDto;
 import com.br.studies.crud.dto.CharacterIdDto;
-import com.br.studies.crud.entity.Character;
 import com.br.studies.crud.service.CharacterService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
