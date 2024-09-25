@@ -1,9 +1,11 @@
 package com.br.studies.crud.controller;
 
 import com.br.studies.crud.dto.CharacterDto;
+import com.br.studies.crud.dto.CharacterIdDto;
 import com.br.studies.crud.entity.Character;
 import com.br.studies.crud.service.CharacterService;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,13 +22,14 @@ public class CharacterController {
     }
 
     @GetMapping
-    public List<Character> getAllCharacters() {
-        return characterService.listALlCharacters();
+    public ResponseEntity<List<CharacterIdDto>> getAllCharacters() {
+        List<CharacterIdDto> characterDtos = characterService.listALlCharacters();
+        return ResponseEntity.ok(characterDtos);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Character> getCharacter(@PathVariable Integer id) {
-        Character character = characterService.findCharacterById(id);
+    public ResponseEntity<CharacterDto> getCharacter(@PathVariable Integer id) {
+        CharacterDto character = characterService.findCharacterById(id);
         if (character == null) {
             return ResponseEntity.notFound().build();
         }
@@ -34,22 +37,21 @@ public class CharacterController {
     }
 
     @PostMapping
-    public ResponseEntity<Character> createCharacter(@RequestBody @Valid CharacterDto characterDto) {
-        Character character = new Character(characterDto);
-        Character characterCreated = characterService.saveCharacter(character);
-        if (characterCreated == null) {
+    public ResponseEntity<CharacterIdDto> createCharacter(@RequestBody @Valid CharacterIdDto characterDto) {
+        CharacterIdDto characterIdDto = characterService.saveCharacter(characterDto);
+        if (characterIdDto == null) {
             return ResponseEntity.badRequest().build();
         }
-        return ResponseEntity.ok().body(characterCreated);
+        return ResponseEntity.status(HttpStatus.CREATED).body(characterIdDto);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Character> updateCharacter(@PathVariable Integer id, @RequestBody Character character) {
-        Character characterUpdated = characterService.updateCharacter(id, character);
+    public ResponseEntity<CharacterIdDto> updateCharacter(@PathVariable Integer id, @RequestBody CharacterIdDto character) {
+        CharacterIdDto characterUpdated = characterService.updateCharacter(id, character);
         if (characterUpdated == null) {
             return ResponseEntity.badRequest().build();
         }
-        return ResponseEntity.ok().body(characterUpdated);
+        return ResponseEntity.ok(characterUpdated);
     }
 
     @DeleteMapping("/{id}")
